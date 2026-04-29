@@ -13,7 +13,7 @@
             align-items: center; 
             justify-content: center; 
             background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
-            font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
+            font-family: 'Microsoft YaHei', sans-serif;
             padding: 20px;
         }
         .card {
@@ -24,29 +24,15 @@
             max-width: 380px;
             text-align: center;
             animation: fadeIn 0.6s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        .card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, rgba(255,107,107,0.05), rgba(252,182,159,0.05));
-            transform: rotate(45deg);
         }
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(25px) scale(0.95); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
+            from { opacity: 0; transform: translateY(25px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         .icon {
             font-size: 64px;
             margin-bottom: 25px;
             animation: bounce 2.5s ease-in-out infinite;
-            position: relative;
-            z-index: 1;
         }
         @keyframes bounce {
             0%, 100% { transform: translateY(0); }
@@ -59,8 +45,6 @@
             margin-bottom: 30px;
             min-height: 110px;
             font-weight: 500;
-            position: relative;
-            z-index: 1;
         }
         .btn {
             padding: 15px 40px;
@@ -70,8 +54,6 @@
             cursor: pointer;
             transition: all 0.35s ease;
             width: 100%;
-            position: relative;
-            z-index: 1;
             font-weight: 600;
         }
         .btn-primary {
@@ -83,43 +65,19 @@
             transform: translateY(-3px);
             box-shadow: 0 8px 25px rgba(238,90,90,0.45);
         }
-        .btn-primary:active {
-            transform: translateY(-1px);
-        }
         .footer {
             margin-top: 30px;
             color: #7f8c8d;
             font-size: 14px;
-            text-align: center;
-        }
-        .sparkles {
-            position: fixed;
-            font-size: 28px;
-            animation: float 3.5s ease-in-out infinite;
-            pointer-events: none;
-            opacity: 0.6;
-        }
-        @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.6; }
-            50% { transform: translateY(-20px) rotate(15deg); opacity: 1; }
         }
         .counter {
             font-size: 12px;
             color: #95a5a6;
             margin-top: 15px;
-            position: relative;
-            z-index: 1;
         }
     </style>
 </head>
 <body>
-    <span class="sparkles" style="top:8%;left:8%">✨</span>
-    <span class="sparkles" style="top:15%;right:12%;animation-delay:0.4s">🌟</span>
-    <span class="sparkles" style="bottom:25%;left:15%;animation-delay:0.8s">💫</span>
-    <span class="sparkles" style="bottom:15%;right:8%;animation-delay:1.2s">⭐</span>
-    <span class="sparkles" style="top:30%;left:5%;animation-delay:1.6s">🌙</span>
-    <span class="sparkles" style="bottom:40%;right:18%;animation-delay:2s">🌈</span>
-    
     <div class="card">
         <div class="icon" id="icon">💪</div>
         <p class="quote" id="quote">准备好接收今日的力量了吗？</p>
@@ -129,7 +87,6 @@
     <p class="footer">触碰NFC标签 · 获取温暖力量 ✨</p>
     
     <script>
-        // 150条励志语句
         const quotes = [
             '路虽远，行则将至；事虽难，做则必成。',
             '半山腰太挤，总要去山顶看一看。',
@@ -288,43 +245,16 @@
         let count = 0;
         
         function getRandomQuote() {
-            // 随机选择励志语
             const randomIndex = Math.floor(Math.random() * quotes.length);
-            const quote = quotes[randomIndex];
-            
-            // 随机选择图标
             const iconIndex = Math.floor(Math.random() * icons.length);
-            const icon = icons[iconIndex];
-            
-            // 更新显示
-            document.getElementById('quote').textContent = quote;
-            document.getElementById('icon').textContent = icon;
-            
-            // 更新计数
+            document.getElementById('quote').textContent = quotes[randomIndex];
+            document.getElementById('icon').textContent = icons[iconIndex];
             count++;
             document.getElementById('count').textContent = count;
-            
-            // 添加动画效果
-            const card = document.querySelector('.card');
-            card.style.transform = 'scale(0.98)';
-            setTimeout(() => {
-                card.style.transform = 'scale(1)';
-            }, 100);
         }
         
-        // 页面加载时显示第一条励志语
         getRandomQuote();
-        
-        // 点击按钮获取新励志语
         document.getElementById('newQuote').addEventListener('click', getRandomQuote);
-        
-        // 支持键盘空格键获取新励志语
-        document.addEventListener('keydown', (e) => {
-            if (e.code === 'Space') {
-                e.preventDefault();
-                getRandomQuote();
-            }
-        });
     </script>
 </body>
 </html>
